@@ -37,10 +37,10 @@
                 "packagerName": "vitetj",
                 "packagerUrl": "https://github.com/vitetj",
                 "minBoxVersion": "9.1.0",
-                "dockerImage": "ghcr.io/vitetj/documizeconversion-cloudron:1.0.0"
+                "dockerImage": "ghcr.io/vitetj/documizeconversion-cloudron:1.0.0@sha256:ad23d058ef01719f5f16cef53b6308dc1da2a91c6098f09918d0dbf787de2148"
             },
             "creationDate": "Tue, 22 Sep 2026 06:35:47 GMT",
-            "ts": "Tue, 22 Sep 2026 06:35:47 GMT",
+            "ts": "Tue, 22 Sep 2026 07:01:08 GMT",
             "publishState": "published"
         }
     }
