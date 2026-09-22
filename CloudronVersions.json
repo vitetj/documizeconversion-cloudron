@@ -1,0 +1,47 @@
+{
+    "stable": true,
+    "versions": {
+        "1.0.0": {
+            "manifest": {
+                "id": "com.documize.conversion.cloudronapp",
+                "title": "Documize Conversion",
+                "tagline": "Word document import and PDF generation service for Documize",
+                "manifestVersion": 2,
+                "version": "1.0.0",
+                "upstreamVersion": "3.4.0",
+                "healthCheckPath": "/api/version",
+                "httpPort": 5010,
+                "memoryLimit": 2147483648,
+                "addons": {
+                    "localstorage": {}
+                },
+                "description": "### Overview\n\nThis app packages the **Documize conversion service** \u2014 the companion service that\n[Documize Community](https://www.documize.com) calls to import Word documents and\nto generate PDF exports.\n\nDocumize itself ships without these capabilities: when a user uploads a `.docx`\nfile or exports a document as PDF, the Documize server forwards the job to a\nseparate conversion endpoint. Documize's own hosted endpoint is a shared service,\nso the vendor recommends running the\n[documize/conversion](https://hub.docker.com/r/documize/conversion) container\nyourself and pointing your instance at it. That is exactly what this app does,\nwith the service reachable over HTTPS on its own Cloudron domain.\n\n### Features\n\n* Word (`.docx`) and `.doc` import into Documize sections\n* PDF export of Documize documents, rendered with headless Chromium\n* PlantUML diagram rendering\n* Ships the upstream TrueType font set so converted documents keep their layout\n* Runs unprivileged, keeps its scratch space on the app's own data volume\n\n### Usage\n\nOnce installed, open your Documize instance as an administrator and set the\nconversion endpoint to this app's URL (Settings \u2192 Documents/Conversion, or\n`ConversionEndpoint` in the organisation settings). No further configuration is\nneeded \u2014 there is no user interface to log into, the app only answers the\nDocumize server's API calls.\n\n### Note\n\nThe conversion API is unauthenticated by design, because the Documize server\ncalls it machine-to-machine. Treat the app's domain as a public endpoint and read\nthe security section of the package README before exposing it.",
+                "changelog": "[1.0.0]\n* Initial Cloudron package of the Documize conversion service\n* Based on upstream documize/conversion 3.4.0",
+                "postInstallMessage": "This app has no web interface \u2014 it only answers API calls from your Documize\nserver. A browser visiting it is redirected to documize.com; that is expected.\n\nTo start using it, sign in to your Documize instance as an administrator and set\nthe conversion service endpoint to `$CLOUDRON-APP-ORIGIN`.\n\nYou can check that the service is up with\n`curl $CLOUDRON-APP-ORIGIN/api/version`, which returns the upstream version\nnumber.\n\nThe conversion API is not password protected, since Documize calls it without\ncredentials. Anyone who knows this address can submit documents for conversion,\nso restrict access at the firewall if the endpoint does not need to be public.",
+                "icon": "file://logo.png",
+                "iconUrl": "https://raw.githubusercontent.com/vitetj/documizeconversion-cloudron/main/logo.png",
+                "mediaLinks": [
+                    "https://raw.githubusercontent.com/vitetj/documizeconversion-cloudron/main/media/screenshot.png"
+                ],
+                "tags": [
+                    "documize",
+                    "conversion",
+                    "documents",
+                    "docx",
+                    "word",
+                    "pdf",
+                    "wiki"
+                ],
+                "website": "https://www.documize.com",
+                "documentationUrl": "https://docs.documize.com",
+                "packagerName": "vitetj",
+                "packagerUrl": "https://github.com/vitetj",
+                "minBoxVersion": "9.1.0",
+                "dockerImage": "ghcr.io/vitetj/documizeconversion-cloudron:1.0.0"
+            },
+            "creationDate": "Tue, 22 Sep 2026 06:35:47 GMT",
+            "ts": "Tue, 22 Sep 2026 06:35:47 GMT",
+            "publishState": "published"
+        }
+    }
+}

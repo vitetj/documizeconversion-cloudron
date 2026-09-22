@@ -17,25 +17,64 @@ Version amont empaquetée : **3.4.0**.
 
 ## Installation
 
+### Option A — import direct dans Cloudron (recommandé)
+
+Le dépôt publie un `CloudronVersions.json`, le format d'app communautaire de
+Cloudron. Dans le dashboard : **App Store → Install from URL**, avec :
+
+```
+https://raw.githubusercontent.com/vitetj/documizeconversion-cloudron/main/CloudronVersions.json
+```
+
+ou en ligne de commande :
+
+```bash
+cloudron install \
+  --versions-url https://raw.githubusercontent.com/vitetj/documizeconversion-cloudron/main/CloudronVersions.json \
+  --location apidocumize --domain ixapack.com
+```
+
+Pour que cette URL soit installable, l'image doit exister dans un registre
+public. Elle est construite et publiée par GitHub Actions :
+
+1. onglet **Actions → Publish app image → Run workflow** (le workflow lit la
+   version dans `CloudronManifest.json`, construit l'image, la pousse dans
+   `ghcr.io/vitetj/documizeconversion-cloudron` et met à jour
+   `CloudronVersions.json` avec le digest exact) ;
+2. une fois le premier build terminé, passez le package GHCR en public :
+   page du dépôt → **Packages** → `documizeconversion-cloudron` → *Package
+   settings* → *Change visibility* → **Public**. Sans cela, Cloudron ne peut pas
+   télécharger l'image.
+
+Ensuite l'import depuis l'URL fonctionne directement, et à chaque nouvelle
+version il suffit de relancer le workflow.
+
+### Option B — build local avec le CLI Cloudron
+
 Prérequis : Cloudron 9.1 ou plus récent (`minBoxVersion` du manifeste — à
 abaisser si votre serveur est plus ancien), le
-[CLI Cloudron](https://docs.cloudron.io/packaging/cli/) et un accès Docker pour
-construire l'image.
+[CLI Cloudron](https://docs.cloudron.io/packaging/cli/) et un accès Docker.
 
 ```bash
 git clone https://github.com/vitetj/documizeconversion-cloudron
 cd documizeconversion-cloudron
 
-# 1. construire et pousser l'image dans votre registry Docker
-cloudron build
-
-# 2. installer sur le domaine voulu
+cloudron build                                        # construit et pousse l'image
 cloudron install --location apidocumize --domain ixapack.com
 ```
 
 L'application est ensuite accessible sur `https://apidocumize.ixapack.com`.
+Mise à jour ultérieure : `cloudron build && cloudron update --app apidocumize.ixapack.com`.
 
-Pour mettre à jour le paquet plus tard : `cloudron build && cloudron update --app apidocumize.ixapack.com`.
+### Publier une nouvelle version
+
+1. incrémenter `version` dans `CloudronManifest.json` et ajouter une entrée dans
+   `CHANGELOG.md` ;
+2. relancer le workflow **Publish app image**.
+
+`scripts/build-versions.py` régénère `CloudronVersions.json` à partir du
+manifeste (les champs `file://` sont incorporés) en conservant les versions
+précédentes, afin que les anciennes restent installables.
 
 ## Configuration de Documize
 
@@ -130,16 +169,20 @@ uniquement en local pour le rendu). Il n'est pas maintenu par ce paquet.
 ## Contenu du dépôt
 
 ```
-CloudronManifest.json   manifeste de l'application
-Dockerfile              construction multi-étapes depuis l'image amont
-start.sh                préparation du runtime et lancement du service
-DESCRIPTION.md          description affichée par Cloudron
-POSTINSTALL.md          message affiché après installation
-CHANGELOG.md            journal des versions du paquet
-logo.png                icône 256x256
-scripts/smoke-test.sh   test de bout en bout (santé + conversion réelle)
-scripts/make-logo.py    génération de l'icône
+CloudronManifest.json    manifeste de l'application
+CloudronVersions.json    catalogue d'installation directe (App Store communautaire)
+Dockerfile               construction multi-étapes depuis l'image amont
+start.sh                 préparation du runtime et lancement du service
+DESCRIPTION / POSTINSTALL / CHANGELOG   textes affichés par Cloudron
+logo.png                 icône 256x256
+media/screenshot.png     visuel de la fiche app
+.github/workflows/publish.yml   build + push GHCR + mise à jour du catalogue
+scripts/build-versions.py       génération de CloudronVersions.json
+scripts/smoke-test.sh           test de bout en bout (santé + conversion réelle)
+scripts/make-logo.py            génération de l'icône
+scripts/banner.html             source du visuel
 ```
+
 
 ## Tests effectués
 

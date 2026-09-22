@@ -15,6 +15,10 @@
     "changelog": "file://CHANGELOG.md",
     "postInstallMessage": "file://POSTINSTALL.md",
     "icon": "file://logo.png",
+    "iconUrl": "https://raw.githubusercontent.com/vitetj/documizeconversion-cloudron/main/logo.png",
+    "mediaLinks": [
+        "https://raw.githubusercontent.com/vitetj/documizeconversion-cloudron/main/media/screenshot.png"
+    ],
     "tags": [
         "documize",
         "conversion",

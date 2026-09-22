@@ -1,0 +1,62 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { width:1200px; height:400px; display:flex; overflow:hidden;
+       font-family:Arial,Helvetica,sans-serif; background:#0f1b2b; color:#e9eff7; }
+.left { width:480px; padding:46px 40px; display:flex; flex-direction:column;
+        justify-content:space-between; background:linear-gradient(155deg,#1b3f6e 0%,#0f1b2b 100%); }
+.brand { display:flex; align-items:center; gap:18px; }
+.brand img { width:76px; height:76px; border-radius:18px; }
+h1 { font-size:29px; line-height:1.15; letter-spacing:-0.4px; }
+h1 span { display:block; font-size:15px; font-weight:normal; color:#9fbbdb; margin-top:7px; letter-spacing:0; }
+.lead { font-size:16px; line-height:1.5; color:#c3d5e9; }
+.flow { display:flex; align-items:center; gap:9px; font-size:13px; color:#cfe0f2; }
+.chip { background:#1d3d69; border:1px solid #2f5c94; border-radius:6px; padding:7px 11px; white-space:nowrap; }
+.arrow { color:#6f9bcb; font-size:15px; }
+.right { flex:1; padding:46px 40px 46px 0; display:flex; flex-direction:column; gap:18px; }
+.card { background:#0a121e; border:1px solid #23364f; border-radius:12px; overflow:hidden; }
+.bar { display:flex; align-items:center; gap:7px; padding:11px 14px; background:#13203225;
+       border-bottom:1px solid #23364f; }
+.dot { width:11px; height:11px; border-radius:50%; }
+.title { font-size:12px; color:#7e97b4; margin-left:8px; }
+pre { font-family:"Liberation Mono","Courier New",monospace; font-size:14.5px; line-height:1.7;
+      padding:16px 18px; color:#d7e3f1; }
+.p { color:#6ec28b; } .c { color:#9fb6cf; } .o { color:#f0b45e; } .g { color:#7fd6a4; }
+.facts { display:flex; gap:10px; font-size:12.5px; color:#9fbbdb; }
+.fact { flex:1; background:#13233a; border:1px solid #23364f; border-radius:9px; padding:11px 13px; }
+.fact b { display:block; color:#e9eff7; font-size:14px; margin-bottom:3px; }
+</style></head><body>
+<div class="left">
+  <div class="brand">
+    <img src="../logo.png">
+    <h1>Documize Conversion<span>Paquet Cloudron &middot; service amont 3.4.0</span></h1>
+  </div>
+  <p class="lead">Import de documents Word et g&eacute;n&eacute;ration des PDF pour votre instance Documize,
+     sur votre propre domaine.</p>
+  <div class="flow">
+    <div class="chip">Documize</div><div class="arrow">&#8594;</div>
+    <div class="chip">apidocumize.ixapack.com</div><div class="arrow">&#8594;</div>
+    <div class="chip">HTML / PDF</div>
+  </div>
+</div>
+<div class="right">
+  <div class="card">
+    <div class="bar">
+      <div class="dot" style="background:#e56a5a"></div><div class="dot" style="background:#e3b341"></div>
+      <div class="dot" style="background:#5bbd7a"></div><div class="title">smoke-test</div>
+    </div>
+<pre><span class="p">$</span> curl https://apidocumize.ixapack.com<span class="c">/api/version</span>
+<span class="g">3.4.0</span>
+
+<span class="p">$</span> scripts/smoke-test.sh https://apidocumize.ixapack.com <span class="o">rapport.docx</span>
+==&gt; POST /api/1/word (rapport.docx)
+<span class="g">    converted, result.html returned</span>
+<span class="g">==&gt; OK</span></pre>
+  </div>
+  <div class="facts">
+    <div class="fact"><b>Word &rarr; HTML</b>Aspose + OpenJDK&nbsp;11</div>
+    <div class="fact"><b>Export PDF</b>Chromium headless</div>
+    <div class="fact"><b>Cloudron</b>port 5010, utilisateur cloudron</div>
+  </div>
+</div>
+</body></html>
