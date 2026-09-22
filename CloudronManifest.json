@@ -1,0 +1,36 @@
+{
+    "id": "com.documize.conversion.cloudronapp",
+    "title": "Documize Conversion",
+    "tagline": "Word document import and PDF generation service for Documize",
+    "manifestVersion": 2,
+    "version": "1.0.0",
+    "upstreamVersion": "3.4.0",
+    "healthCheckPath": "/api/version",
+    "httpPort": 5010,
+    "memoryLimit": 2147483648,
+    "addons": {
+        "localstorage": {}
+    },
+    "description": "file://DESCRIPTION.md",
+    "changelog": "file://CHANGELOG.md",
+    "postInstallMessage": "file://POSTINSTALL.md",
+    "icon": "file://logo.png",
+    "iconUrl": "https://raw.githubusercontent.com/vitetj/documizeconversion-cloudron/main/logo.png",
+    "mediaLinks": [
+        "https://raw.githubusercontent.com/vitetj/documizeconversion-cloudron/main/media/screenshot.png"
+    ],
+    "tags": [
+        "documize",
+        "conversion",
+        "documents",
+        "docx",
+        "word",
+        "pdf",
+        "wiki"
+    ],
+    "website": "https://www.documize.com",
+    "documentationUrl": "https://docs.documize.com",
+    "packagerName": "vitetj",
+    "packagerUrl": "https://github.com/vitetj",
+    "minBoxVersion": "9.1.0"
+}
